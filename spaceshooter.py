@@ -97,7 +97,7 @@ class Rocket1(Sprite):
     def explode(self):
         self.visible = False
         ExplosionBig(self.position)
-        self.waitspawn = 1
+        self.waitspawn = 0
     def thrustOn(self, event):
         self.thrust = 1
     def thrustOff(self, event):
@@ -174,7 +174,7 @@ class Rocket2(Sprite):
     def explode(self):
         self.visible = False
         ExplosionBig(self.position)
-        self.waitspawn = 1
+        self.waitspawn = 0
     def thrustOn(self, event):
         self.thrust = 1
     def thrustOff(self, event):
@@ -201,15 +201,14 @@ class Sun(Sprite):
             collides = self.collidingWithSprites(Rocket1)
             if len(collides):
                 self.explode()
-        else:
-            self.setImage(2)
+        if self.setImage(2):
             collides = self.collidingWithSprites(Rocket2)
             if len(collides):
                 self.explode()
     def explode(self):
         self.visible = False
         ExplosionBig(self.position)
-        self.waitspawn = 0
+        self.waitspawn = 1
 class ExplosionBig(Sprite):
     asset = ImageAsset("images/explosion2.png", 
     Frame(0,0,4800/25,195), 25)
