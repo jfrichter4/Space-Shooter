@@ -209,6 +209,7 @@ class Sun(Sprite):
         self.visible = False
         ExplosionBig(self.position)
         self.waitspawn = 0
+        
 class ExplosionBig(Sprite):
     asset = ImageAsset("images/explosion2.png", 
     Frame(0,0,4800/25,195), 25)
