@@ -10,28 +10,6 @@ from ggame import App, Sprite, ImageAsset, Frame
 from ggame import SoundAsset, Sound, TextAsset, Color
 import math
 from time import time
-"""
-Plan:
-Create a Space Shooter game.
-How:
-Include these sprites:
-    Background
-    Sun
-    Rocket 1
-    Rocket 2
-    Bullet Sprite - with noise
-    Thruster Sprite - with noise (I think)
-    Explosion Sprite - with noise (I think)
-Have movement:
-    Control the rockets with arrow/WASD keys
-    Make the rockets move, always
-Have collisions:
-    When the rocket enters a certain area around the center, make the rocket explode.
-    When the rockets enter a certain area around another rocket, they both explode.
-    Basically, make it so that IF a sprite has the same (X, Y) as another sprite, what has been hit explodes.
-    
-Start!
-"""
 SW = 1440
 SH = 768
 class Rocket1(Sprite):
@@ -160,11 +138,15 @@ class Rocket2(Sprite):
         collides = self.collidingWithSprites(Sun)
         if len(collides):
                 self.explode()
+                self.vx = 0
+                self.vy = 0
         else:
             self.setImage(1)
         collides = self.collidingWithSprites(Rocket1)
         if len(collides):
                 self.explode()
+                self.vx = 0
+                self.vy = 0
     def move(self):
         self.X = math.sin(self.rotation)
         self.Y = math.cos(self.rotation)
@@ -198,17 +180,12 @@ class Sun(Sprite):
     def step(self):
         if self.setImage(1):
             collides = self.collidingWithSprites(Rocket1)
-            if len(collides):
-                self.explode()
         if self.setImage(2):
             collides = self.collidingWithSprites(Rocket2)
-            if len(collides):
-                self.explode()
     def explode(self):
         self.visible = False
         ExplosionBig(self.position)
         self.waitspawn = 500
-        
 class ExplosionBig(Sprite):
     asset = ImageAsset("images/explosion2.png", 
     Frame(0,0,4800/25,195), 25)
