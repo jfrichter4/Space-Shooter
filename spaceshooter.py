@@ -198,7 +198,7 @@ class ExplosionBig(Sprite):
         self.boom.play()
     def step(self):
         self.setImage(self.image//2)
-        self.image += 2
+        self.image += 1
         if self.image == 50:
             self.destroy()
 
